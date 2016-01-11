@@ -12,13 +12,18 @@ namespace Project1
         static void Main(string[] args)
         {
             Context context = new Context();
-            FindSongs(context, "Andrew Peters");
+            List<Song> songs = new List<Song>();
+            songs = FindSongs(context, "Andrew Peters");
+            if (songs.Count != 0)
+            {
+                Console.WriteLine(songs[0].Name);
+            }
         }
 
-        static Song[] FindSongs(Context context, string SingerName)
+        static List<Song> FindSongs(Context context, string SingerName)
         {
             var rezult = context.Songs.Where(e => e.Singer.Name == SingerName);
-            return rezult.OrderBy(e => e.Name).ToArray().ToArray();
+            return rezult.OrderBy(e => e.Name).ToArray().ToList();
         }
     }
 }
